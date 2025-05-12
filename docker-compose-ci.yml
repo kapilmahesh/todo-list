@@ -5,11 +5,9 @@ services:
     ports:
       - "6000:5000"
     depends_on:
-      ci-mysql:
-        condition: service_healthy
+      - ci-mysql
     environment:
       - MYSQL_HOST=ci-mysql
-    restart: on-failure
   ci-mysql:
     image: mysql:8.0
     environment:
@@ -17,11 +15,5 @@ services:
       - MYSQL_DATABASE=todo_db
     volumes:
       - ci-mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    mem_limit: 512m
 volumes:
   ci-mysql-data:
