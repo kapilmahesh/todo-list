@@ -8,7 +8,6 @@ services:
       - ci-mysql
     environment:
       - MYSQL_HOST=ci-mysql
-    restart: unless-stopped
   ci-mysql:
     image: mysql:8.0
     environment:
@@ -16,6 +15,5 @@ services:
       - MYSQL_DATABASE=todo_db
     volumes:
       - ci-mysql-data:/var/lib/mysql
-    restart: unless-stopped
 volumes:
   ci-mysql-data:
